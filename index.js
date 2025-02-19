@@ -2,33 +2,62 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-// Middleware para analisar JSON no corpo das requisições
+// Middleware para JSON 
 app.use(express.json());
 
-// Array para armazenar os usuários em memória
+// usuários em memória
 let usuarios = [
-  { id: 1, nome: 'João Silva' },
-  { id: 2, nome: 'Maria Souza' }
+  { id: 1, nome: 'Little Daniel' },
+  { id: 2, nome: 'Hebert Souza' }
 ];
 
-// Rota GET para listar usuários
+// GET 
 app.get('/users', (req, res) => {
   res.json(usuarios);
 });
 
-// Rota POST para adicionar um novo usuário
+// POST 
 app.post('/users', (req, res) => {
-  // Os dados do novo usuário virão no corpo da requisição
+
   const novoUsuario = req.body;
 
-  // Cria um ID para o novo usuário (exemplo simples)
   novoUsuario.id = usuarios.length + 1;
 
-  // Adiciona o novo usuário ao array
   usuarios.push(novoUsuario);
 
-  // Retorna o novo usuário com o status 201 (Criado)
   res.status(201).json(novoUsuario);
+});
+
+//PUT
+app.put('/users/:id', (req,res) => {
+    const id = parseInt (req.params.id);
+    const usuarioAtualizado = req.body;
+
+  const index = usuarios.findIndex(u => u.id === id);
+
+  if (index !== -1){
+
+    usuarios[index] = { ...usuarios[index], ...usuarioAtualizado};
+    res.json(usuarios[index]);
+  } else {
+    res.status(404).json({ error: 'User not found' });
+  }
+
+
+
+});
+
+app.delete('/users/:id' , (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = usuarios.findIndex(u => u.id === id);
+
+  if(index !== -1){
+    const usuarioRemovido = usuarios.splice(index, 1);
+    res.json(usuarioRemovido);
+  } else {
+    res.status(404).json({ error: 'User not found'});
+  }
+
 });
 
 // Rota raiz para confirmar que a API está funcionando
