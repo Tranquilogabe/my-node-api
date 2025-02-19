@@ -1,0 +1,1 @@
+// Neste arquivo deve se criar uma regra de negocio, como no momento nao estamos desenvolvendo efetivamente um projeto, é sim apenas a estruttura.
