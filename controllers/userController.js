@@ -8,7 +8,7 @@ try {
     res.json(users);
 } catch (error) {
     res.status(500).json({ error: error.message });
-}
+    }
 };
 
 
@@ -16,7 +16,7 @@ try {
 
 const createUser = async (req, res) =>{
     try{
-        const newUser = new user(req.body);
+        const newUser = new User(req.body);
         await newUser.save();
         res.status(201).json(newUser);
     } catch (error) {
@@ -29,4 +29,4 @@ const createUser = async (req, res) =>{
 
 
 
-module.exports = { gerUsers, createUser };
+module.exports = { getUsers, createUser };

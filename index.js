@@ -6,8 +6,8 @@ const port = 3000;
 // Middleware para JSON 
 app.use(express.json());
 
-
-mongoose.connect('mongodb://localhost:2701/my-api',{
+//conectando ao mongo
+mongoose.connect('mongodb://localhost:27017/my-api',{
   useNewurlParser: true,
   useUnifiedTopology: true
 })
