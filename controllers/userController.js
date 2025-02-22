@@ -28,16 +28,19 @@ const createUser = async (req, res) =>{
 //PUT
 const updateUser = async (req, res) => {
     try{
-        
+        //
         const id = req.params.id;
+        //
         const updatedData = req.body;
+        //
         const updatedUser = await User.findByIdAndUpdate(id, updatedData, { new: true });
+
+
         if (!updatedUser) {
-            
-
+            return res.status(404).json({ error: 'Não achamos nem um pilantra'});
         }
-        return res.status(404).json({ error: 'Não achamos nem um pilantra'});
 
+        req.json(updateUser);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
