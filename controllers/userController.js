@@ -1,6 +1,6 @@
 const User = require('../models/user');
 
-//Listar usuários
+//GET
 
 const getUsers = async (req, res) => {
 try {
@@ -12,7 +12,7 @@ try {
 };
 
 
-//Criar usuario
+//POST
 
 const createUser = async (req, res) =>{
     try{
@@ -25,8 +25,51 @@ const createUser = async (req, res) =>{
 };
 
 
-//implementar no futuro funcoes como uptade e delete user.
+//PUT
+const updateUser = async (req, res) => {
+    try{
+        
+        const id = req.params.id;
+        const updatedData = req.body;
+        const updatedUser = await User.findByIdAndUpdate(id, updatedData, { new: true });
+        if (!updatedUser) {
+            
+
+        }
+        return res.status(404).json({ error: 'Não achamos nem um pilantra'});
+
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+
+//DELETE
+
+const deleteUser = async (req,res) => {
+    try{
+        const id = req.params.id;
+
+      
+
+        const deletedUser = await User.findByIdAndDelete(id);
+
+        if(!deletedUser) {
+            return res.status(404).json({ error:'Nao achamos o pilantra'});
+        }
+        res.json({ message: 'Deletamos o pilantra'});
+    } catch (error) {
+        res.status(400).json({ error: error.message});
+    }
+};
 
 
 
-module.exports = { getUsers, createUser };
+
+
+
+
+
+
+
+module.exports = { getUsers, createUser, updateUser , deleteUser };

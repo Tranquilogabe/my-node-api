@@ -3,10 +3,20 @@ const router =  express.Router();
 const userController = require('../controllers/userController');
 
 
-//rota listar usuarios
+//ROTA DO GET
 router.get('/', userController.getUsers);
 
-//rota criar usuario
+//ROTA DO POST
 router.post('/', userController.createUser);
+
+//ROTA DO PUT
+router.put('/:id', userController.updateUser);
+
+//ROTA DO DELETE
+router.delete('/:id', userController.deleteUser);
+
+
+
+
 
 module.exports = router;
