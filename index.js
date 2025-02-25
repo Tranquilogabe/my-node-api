@@ -17,7 +17,22 @@ mongoose.connect('mongodb://localhost:27017/my-api',{
 
 //Usando as rotas
 const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
+
+
 app.use('/users', userRoutes);
+app.use('/auth,', authRoutes);
+
+//
+
+
+
+//Exemplo de rota protegida
+const { verifyToken } = require('./middlewares/authMiddleware');
+app.get('/protected', verifyToken, (req,res) => {
+  res.json({ message: 'acesso autorizado a rota protegida', user: req.user });
+});
+
 
 
 // Rota raiz para confirmar que a API está funcionando
