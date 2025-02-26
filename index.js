@@ -21,7 +21,7 @@ const authRoutes = require('./routes/authRoutes');
 
 
 app.use('/users', userRoutes);
-app.use('/auth,', authRoutes);
+app.use('/auth', authRoutes);
 
 //
 

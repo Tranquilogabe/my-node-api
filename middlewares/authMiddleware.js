@@ -19,7 +19,7 @@ const verifyToken = (req, res, next) => {
         }
 
         // Armazenar o payload na requisicao, para caso precise dele mais adiante
-        req.user = decoaded;
+        req.user = decoded;
         next();
     });
 };
